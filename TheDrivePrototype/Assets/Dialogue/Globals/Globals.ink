@@ -1,0 +1,1 @@
+VAR random_number = 0
