@@ -9,13 +9,13 @@ Random Number Generator
 
 Get a number higher than 3!
 
-* [Generate Number]
+* [Get Number!]
 
 ~random_number = RANDOM(1,5)
 
 {random_number}
 
-**{random_number <= 3}
+**{random_number <=3}
 ->
 Uh oh! Your number was lower than or equal to 3! Too bad!
 
