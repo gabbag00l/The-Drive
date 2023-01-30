@@ -13,10 +13,15 @@ public class CutOutScript : MonoBehaviour
     private LayerMask wallMask;
 
     private Camera mainCamera;
+    
+
+    public float cutOutSize;
+    public float fallOffSize;
 
     private void Awake()
     {
         mainCamera = GetComponent<Camera>();
+        
     }
     void Update()
     {
@@ -33,8 +38,8 @@ public class CutOutScript : MonoBehaviour
             for (int m = 0; m < materials.Length; ++m)
             {
                 materials[m].SetVector("_CutoutPos", cutoutPos);
-                materials[m].SetFloat("_CutoutSize", 0.1f);
-                materials[m].SetFloat("_FalloffSize", 0.05f);
+                materials[m].SetFloat("_CutoutSize", cutOutSize);
+                materials[m].SetFloat("_FalloffSize", fallOffSize);
             }
         }
     }

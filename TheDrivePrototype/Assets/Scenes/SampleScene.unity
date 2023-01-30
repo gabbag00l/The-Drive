@@ -226,7 +226,7 @@ Transform:
   - {fileID: 731983687}
   - {fileID: 561563140}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &407090666 stripped
 GameObject:
@@ -460,7 +460,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &705975060
 PrefabInstance:
@@ -618,7 +618,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -175.1, z: 0}
 --- !u!1001 &1049449450
 PrefabInstance:
@@ -848,6 +848,8 @@ MonoBehaviour:
   - {fileID: 407090666}
   - {fileID: 422064549}
   - {fileID: 1060699914}
+  loadGlobalsJSON: {fileID: 0}
+  cardsValue: 0
 --- !u!1 &1646347613
 GameObject:
   m_ObjectHideFlags: 0
