@@ -1,6 +1,13 @@
 VAR random_number = 0
 VAR current_hand = ""
 
+VAR aware_of_shooting = false
+VAR learned_about_shooting_at_hotel = false
+
+VAR spoke_to_priest = false
+
+VAR undertaker_too_busy = false
+VAR told_to_get_proof = false
 
 === function GetRandomHand ===
 
