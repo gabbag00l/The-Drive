@@ -11,6 +11,9 @@ public class DialogueManager : MonoBehaviour
 {
     private static DialogueManager instance;
 
+    [Header("Paramaters")]
+    [SerializeField] private float textSpeed = 0.02f;
+    
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
@@ -24,6 +27,10 @@ public class DialogueManager : MonoBehaviour
     private TextMeshProUGUI[] choicesText;
 
     public Story currentStory;
+
+    private Coroutine typingTextCoroutine;
+
+    private bool canContinueToNextLine = false;
 
     public int cardsValue;
 
@@ -69,7 +76,9 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && currentStory.currentChoices.Count == 0)
+        if (canContinueToNextLine 
+            && Input.GetKeyDown(KeyCode.Space)
+            && currentStory.currentChoices.Count == 0)
         {
             Debug.Log("Continuing Story");
             ContinueStory();
@@ -88,6 +97,7 @@ public class DialogueManager : MonoBehaviour
         dialogueVariables.StartListening(currentStory);
 
         ContinueStory();
+        
       
     }
 
@@ -107,15 +117,52 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentStory.canContinue)
         {
-            dialogueText.text = currentStory.ContinueMaximally();
-            DisplayChoices();
+            if( typingTextCoroutine != null)
+            {
+                StopCoroutine(typingTextCoroutine);
+            }
+            
+           typingTextCoroutine = StartCoroutine(TypingText(currentStory.ContinueMaximally()));
+            
+            
+            
             Debug.Log("can Continue");
+           
             dialoguePanel.GetComponentInChildren<Scrollbar>().value = 1;
 
         }
         else
         {
             StartCoroutine(ExitDialogueMode());
+        }
+    }
+
+    private IEnumerator TypingText(string line)
+    {
+        dialogueText.text = "";
+
+        HideChoices();
+        
+        canContinueToNextLine = false;
+
+        foreach (char letter in line.ToCharArray())
+        {
+            
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(textSpeed);
+        }
+
+        DisplayChoices();
+        
+
+        canContinueToNextLine = true;
+    }
+
+    private void HideChoices()
+    {
+        foreach(GameObject choiceButton in choices)
+        {
+            choiceButton.SetActive(false);
         }
     }
 
@@ -147,8 +194,14 @@ public class DialogueManager : MonoBehaviour
 
     public void MakeChoice(int choiceIndex)
     {
-        currentStory.ChooseChoiceIndex(choiceIndex);
-        ContinueStory();
+        if (canContinueToNextLine)
+        {
+            currentStory.ChooseChoiceIndex(choiceIndex);
+            ContinueStory();
+            
+        }
+        
+        
     }
 
     private IEnumerator SelectFirstChoice()
