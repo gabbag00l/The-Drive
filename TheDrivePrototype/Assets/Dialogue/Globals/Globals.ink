@@ -9,6 +9,7 @@ VAR spoke_to_priest = false
 VAR undertaker_too_busy = false
 VAR told_to_get_proof = false
 
+VAR shop_shooter_evidence = false
 === function GetRandomHand ===
 
 {random_number:
